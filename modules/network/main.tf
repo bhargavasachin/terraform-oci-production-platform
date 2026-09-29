@@ -21,6 +21,8 @@ resource "oci_core_nat_gateway" "this" {
   freeform_tags  = var.freeform_tags
 }
 
+data "oci_core_services" "all" {}
+
 resource "oci_core_service_gateway" "this" {
   compartment_id = var.compartment_id
   vcn_id         = oci_core_vcn.this.id
@@ -31,14 +33,6 @@ resource "oci_core_service_gateway" "this" {
   }
 
   freeform_tags = var.freeform_tags
-}
-
-data "oci_core_services" "all" {
-  filter {
-    name   = "name"
-    values = ["All .* Services In Oracle Services Network"]
-    regex  = true
-  }
 }
 
 resource "oci_core_route_table" "public" {
@@ -67,7 +61,7 @@ resource "oci_core_route_table" "private" {
   }
 
   route_rules {
-    destination       = "oci-phx"
+    destination       = data.oci_core_services.all.services[0].cidr_block
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_service_gateway.this.id
   }
