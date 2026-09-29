@@ -1,0 +1,26 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Variable files containing environment-specific values
+*.tfvars
+!*.tfvars.example
+
+# Terraform plans
+*.tfplan
+plan.out
+
+# Local overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
