@@ -28,8 +28,14 @@ resource "oci_core_service_gateway" "this" {
   vcn_id         = oci_core_vcn.this.id
   display_name   = "${var.name}-service-gw"
 
-  services {
-    service_id = data.oci_core_services.all.services[0].id
+  dynamic "services" {
+    for_each = {
+      for service in data.oci_core_services.all.services : service.id => service
+    }
+
+    content {
+      service_id = services.value.id
+    }
   }
 
   freeform_tags = var.freeform_tags
@@ -60,10 +66,16 @@ resource "oci_core_route_table" "private" {
     network_entity_id = oci_core_nat_gateway.this.id
   }
 
-  route_rules {
-    destination       = data.oci_core_services.all.services[0].cidr_block
-    destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_service_gateway.this.id
+  dynamic "route_rules" {
+    for_each = {
+      for service in data.oci_core_services.all.services : service.cidr_block => service
+    }
+
+    content {
+      destination       = route_rules.value.cidr_block
+      destination_type  = "SERVICE_CIDR_BLOCK"
+      network_entity_id = oci_core_service_gateway.this.id
+    }
   }
 
   freeform_tags = var.freeform_tags
