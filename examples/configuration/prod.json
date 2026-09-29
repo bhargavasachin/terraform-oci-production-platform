@@ -1,0 +1,5 @@
+{
+  "network": {
+    "private_subnet_cidr": "10.20.20.0/24"
+  }
+}
