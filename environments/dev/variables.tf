@@ -3,6 +3,11 @@ variable "compartment_id" {
   type        = string
 }
 
+variable "region" {
+  description = "OCI region for the dev environment."
+  type        = string
+}
+
 variable "name" {
   description = "Environment name prefix."
   type        = string
@@ -31,7 +36,7 @@ variable "freeform_tags" {
   description = "Environment tags."
   type        = map(string)
   default = {
-    managed_by = "terraform"
+    managed_by  = "terraform"
     environment = "dev"
   }
 }
