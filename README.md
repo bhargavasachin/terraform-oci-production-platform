@@ -12,7 +12,7 @@ This repository focuses on the parts of OCI infrastructure that tend to become d
 - Separate public and private subnets
 - Internet, NAT, and service gateways
 - Environment-specific inputs under `environments/`
-- Provider and Terraform version constraints
+- Provider and Terraform version constraints per environment
 - Formatting and validation workflow
 - Examples of keeping reusable modules independent from environment values
 
@@ -24,17 +24,26 @@ This repository focuses on the parts of OCI infrastructure that tend to become d
 │   └── dev/
 │       ├── main.tf
 │       ├── variables.tf
+│       ├── versions.tf
 │       ├── terraform.tfvars.example
 │       └── outputs.tf
 ├── modules/
 │   └── network/
 │       ├── main.tf
 │       ├── variables.tf
+│       ├── versions.tf
 │       └── outputs.tf
+├── docs/
+│   ├── architecture.md
+│   ├── configuration-patterns.md
+│   └── design-decisions.md
+├── examples/
+│   ├── config-driven/
+│   └── configuration/
 ├── .github/workflows/
 │   └── terraform.yml
 ├── .gitignore
-├── versions.tf
+├── LICENSE
 └── README.md
 ```
 
@@ -57,7 +66,7 @@ CIDRs, display names, and availability-domain choices are passed into the enviro
 1. Install Terraform 1.6+.
 2. Configure OCI authentication using the OCI provider's supported authentication method.
 3. Copy `environments/dev/terraform.tfvars.example` to `terraform.tfvars`.
-4. Set the compartment OCID and network CIDRs.
+4. Set the compartment OCID, region, and network CIDRs.
 5. Run:
 
 ```bash

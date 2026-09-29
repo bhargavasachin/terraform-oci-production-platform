@@ -1,4 +1,5 @@
 compartment_id      = "ocid1.compartment.oc1..example"
+region              = "us-ashburn-1"
 name                = "dev-platform"
 vcn_cidr            = "10.20.0.0/16"
 public_subnet_cidr  = "10.20.10.0/24"
