@@ -21,7 +21,13 @@ This repository focuses on the parts of OCI infrastructure that tend to become d
 ```text
 .
 ├── environments/
-│   └── dev/
+│   ├── dev/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── versions.tf
+│   │   ├── terraform.tfvars.example
+│   │   └── outputs.tf
+│   └── staging/
 │       ├── main.tf
 │       ├── variables.tf
 │       ├── versions.tf

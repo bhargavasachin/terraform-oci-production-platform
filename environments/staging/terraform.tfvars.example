@@ -1,0 +1,12 @@
+compartment_id      = "ocid1.compartment.oc1..example"
+region              = "us-ashburn-1"
+name                = "staging-platform"
+vcn_cidr            = "10.30.0.0/16"
+public_subnet_cidr  = "10.30.10.0/24"
+private_subnet_cidr = "10.30.20.0/24"
+
+freeform_tags = {
+  managed_by  = "terraform"
+  environment = "staging"
+  owner       = "platform"
+}
